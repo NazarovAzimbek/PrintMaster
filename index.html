@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>PRINT MASTER — Hujjatni chop etishga tayyorlash</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="toast" role="status" aria-live="polite"></div>
+<main>
+
+<section id="home" class="screen active">
+  <div class="logo" aria-hidden="true">🖨️</div>
+  <h1>PRINT MASTER</h1>
+  <p class="slogan">Hujjatni sozla. Xatolarni top. Chop etishga tayyorla!</p>
+  <p class="lead">Siz hujjatlarni chop etishga tayyorlashga tayyormisiz?</p>
+  <div class="menu">
+    <button class="btn primary big" data-go="mode">▶ O‘yinni boshlash</button>
+    <button class="btn" data-go="rules">❓ Qanday o‘ynaladi? (Qoidalar)</button>
+    <button class="btn" data-go="review">📘 Mavzuni takrorlash</button>
+    <button class="btn" data-go="match">🧩 Mosini top (mini-o‘yin)</button>
+  </div>
+  <div class="card info">
+    <p>🏆 Eng yuqori natija: <b id="best">0</b> ball</p>
+    <p>📶 Yakunlangan bosqichlar: <b id="stg">0</b>/4 &nbsp; • &nbsp; Oxirgi o‘yin: <b id="lastR">—</b></p>
+    <p class="note">Bosqichlar: 1) Sahifa ustasi 2) Hujjat detektivi 3) Chop etishdan oldingi tekshiruv 4) Print Master chempioni</p>
+    <div id="medals" class="medals"></div>
+  </div>
+  <button id="clear" class="btn ghost small">Natijalarni tozalash</button>
+</section>
+
+<section id="mode" class="screen">
+  <h2>O‘yin rejimini tanlang</h2>
+  <div class="two">
+    <button class="card modebtn" data-mode="practice"><span class="ico">🌱</span><b>Mashq rejimi</b><small>Vaqt cheklovisiz o‘rganing.</small></button>
+    <button class="card modebtn" data-mode="challenge"><span class="ico">⏱️</span><b>Challenge rejimi</b><small>Har bir topshiriq vaqt bilan. Vaqt tugasa — 0 ball.</small></button>
+  </div>
+  <button class="btn ghost" data-go="home">← Orqaga</button>
+</section>
+
+<section id="rules" class="screen">
+  <h2>Qanday o‘ynaladi?</h2>
+  <div class="card text">
+    <p>O‘yin 4 bosqichdan iborat: <b>Sahifa ustasi</b> (Margins, Orientation, Size sozlash), <b>Hujjat detektivi</b> (xatoni topish), <b>Chop etishdan oldingi tekshiruv</b> (Print Preview) va <b>Print Master chempioni</b> (aralash savollar).</p>
+    <p><b>Ball:</b> 1-urinishda 100, 2-urinishda 70, 3- va keyingi urinishlarda 40 ball. 💡 Maslahat olsangiz, topshiriq balli 50% ga kamayadi. Challenge rejimida vaqt tugasa — 0 ball.</p>
+    <p>Chop etish tugmasi faqat <b>simulyatsiya</b>: haqiqiy printerga hech narsa yuborilmaydi. O‘yin ichidagi foizlar rasmiy maktab bahosi emas.</p>
+    <p>Ism, pochta yoki telefon so‘ralmaydi. Natijalar faqat shu kompyuter brauzerida saqlanadi.</p>
+  </div>
+  <button class="btn ghost" data-go="home">← Orqaga</button>
+</section>
+
+<section id="review" class="screen">
+  <h2>Mavzuni takrorlash</h2>
+  <p class="note">Hujjatni chop etishga tayyorlaymiz: sahifa sozlamalari va Print Preview</p>
+  <div id="revList" class="revlist"></div>
+  <button class="btn ghost" data-go="home">← Orqaga qaytish</button>
+</section>
+
+<section id="game" class="screen">
+  <div class="hud card">
+    <span>⭐ Ball: <b id="hScore">0</b></span>
+    <span>📍 Bosqich: <b id="hStage">1/4</b></span>
+    <span>📋 Bajarildi: <b id="hDone">0</b></span>
+    <span>✔ To‘g‘ri: <b id="hOk">0</b></span>
+    <span>⏱ Vaqt: <b id="hTime">∞</b></span>
+    <progress id="bar" max="100" value="0" aria-label="Umumiy jarayon"></progress>
+    <button class="btn ghost small" data-go="home">✕ Chiqish</button>
+  </div>
+  <div id="stage"></div>
+</section>
+
+<section id="match" class="screen">
+  <h2>Mosini top</h2>
+  <p class="note">Avval atamani, so‘ng uning vazifasini bosing (yoki teskarisi).</p>
+  <div class="two cols">
+    <div id="mTerms" class="mcol"></div>
+    <div id="mDefs" class="mcol"></div>
+  </div>
+  <p id="mMsg" class="fb" role="status"></p>
+  <button class="btn" id="mAgain">🔄 Qayta aralashtirish</button>
+  <button class="btn ghost" data-go="home">← Bosh sahifa</button>
+</section>
+
+<section id="results" class="screen">
+  <h2>Natijalar</h2>
+  <div class="card text center">
+    <p class="big" id="rMsg"></p>
+    <p>Umumiy ball: <b id="rScore">0</b></p>
+    <p>To‘g‘ri bajarilgan: <b id="rOk">0</b> / <b id="rTot">0</b> (<b id="rPct">0</b>%)</p>
+    <div id="rMedals" class="medals"></div>
+    <p>✅ Yaxshi bajarilgan mavzular: <b id="rGood">—</b></p>
+    <p>🔁 Takrorlash tavsiya etiladi: <b id="rWeak">—</b></p>
+    <p class="note">Bu foizlar rasmiy maktab bahosi emas, o‘yin ichidagi rag‘bat.</p>
+  </div>
+  <div class="menu">
+    <button class="btn primary" id="rAgain">🔄 Qayta o‘ynash</button>
+    <button class="btn" id="rMist">🔎 Xatolarni ko‘rish</button>
+    <button class="btn ghost" data-go="home">🏠 Bosh sahifaga qaytish</button>
+  </div>
+</section>
+
+<section id="mistakes" class="screen">
+  <h2>Xatolarni ko‘rish</h2>
+  <div id="mList"></div>
+  <button class="btn ghost" data-go="results">← Natijalarga qaytish</button>
+</section>
+
+</main>
+<script src="script.js"></script>
+</body>
+</html>
